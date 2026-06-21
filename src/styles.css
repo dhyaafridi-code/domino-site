@@ -1,0 +1,211 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Tokio Domino — night-style design system */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-tile: var(--tile);
+  --color-tile-foreground: var(--tile-foreground);
+
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Figtree", system-ui, sans-serif;
+
+  --shadow-glow-primary: 0 0 40px -8px color-mix(in oklab, var(--primary) 70%, transparent);
+  --shadow-glow-accent: 0 0 40px -8px color-mix(in oklab, var(--accent) 70%, transparent);
+  --shadow-tile: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, oklch(0.65 0.2 30) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, oklch(0.55 0.25 280) 100%);
+  --gradient-night: radial-gradient(
+    ellipse at top,
+    oklch(0.3 0.05 260) 0%,
+    oklch(0.18 0.04 250) 70%
+  );
+  --gradient-felt: radial-gradient(
+    ellipse at center,
+    oklch(0.28 0.04 250) 0%,
+    oklch(0.18 0.03 250) 100%
+  );
+}
+
+:root {
+  --radius: 0.875rem;
+
+  --background: oklch(0.2 0.035 252);
+  --foreground: oklch(0.97 0.01 250);
+
+  --surface: oklch(0.26 0.04 252);
+  --surface-elevated: oklch(0.31 0.045 252);
+
+  --card: oklch(0.26 0.04 252);
+  --card-foreground: oklch(0.97 0.01 250);
+
+  --popover: oklch(0.28 0.04 252);
+  --popover-foreground: oklch(0.97 0.01 250);
+
+  --primary: oklch(0.72 0.18 45);
+  --primary-foreground: oklch(0.15 0.02 30);
+
+  --secondary: oklch(0.33 0.045 252);
+  --secondary-foreground: oklch(0.97 0.01 250);
+
+  --muted: oklch(0.3 0.035 252);
+  --muted-foreground: oklch(0.72 0.02 250);
+
+  --accent: oklch(0.65 0.22 295);
+  --accent-foreground: oklch(0.98 0.01 295);
+
+  --destructive: oklch(0.62 0.24 22);
+  --destructive-foreground: oklch(0.98 0.01 22);
+
+  --success: oklch(0.7 0.17 150);
+
+  --border: oklch(0.35 0.04 252);
+  --input: oklch(0.33 0.04 252);
+  --ring: oklch(0.72 0.18 45);
+
+  --tile: oklch(0.96 0.005 80);
+  --tile-foreground: oklch(0.15 0.02 250);
+}
+
+.dark {
+  --background: oklch(0.2 0.035 252);
+  --foreground: oklch(0.97 0.01 250);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background: var(--gradient-night);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  body {
+    background-attachment: fixed;
+  }
+}
+
+@utility tokio-glow {
+  box-shadow: var(--shadow-glow-primary);
+}
+
+@utility tokio-glass {
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
+}
+
+/* Glowing green click target for a valid open board end. Pulses to draw the
+ * eye; the dashed inner ring reads as an empty "drop here" slot. */
+@utility tokio-dropzone {
+  cursor: pointer;
+  border: 2px dashed color-mix(in oklab, var(--success) 75%, transparent);
+  background: color-mix(in oklab, var(--success) 18%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--success) 30%, transparent),
+    0 0 22px -2px color-mix(in oklab, var(--success) 70%, transparent);
+  animation: tokio-dropzone-pulse 1.25s ease-in-out infinite;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: color-mix(in oklab, var(--success) 32%, transparent);
+    box-shadow:
+      0 0 0 2px color-mix(in oklab, var(--success) 55%, transparent),
+      0 0 34px 0 color-mix(in oklab, var(--success) 85%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes tokio-dropzone-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility tokio-felt {
+  background: var(--gradient-felt);
+  background-image:
+    radial-gradient(circle at 20px 20px, oklch(0.32 0.04 252) 1.5px, transparent 1.5px),
+    var(--gradient-felt);
+  background-size:
+    40px 40px,
+    100%;
+}
+
+@utility scrollbar-thin {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--foreground) 15%, transparent);
+    border-radius: 999px;
+  }
+}
+
+/* Hard guarantee: never let Arabic fonts substitute Eastern digits (٠-٩)
+ * in place of the Western digits (0-9) we explicitly format. Applied to <html>
+ * whenever the locale is Arabic; harmless on English content. */
+.latin-digits {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings:
+    "lnum" 1,
+    "tnum" 1;
+}

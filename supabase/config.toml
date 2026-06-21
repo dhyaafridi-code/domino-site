@@ -1,0 +1,12 @@
+project_id = "cqgddubnwtnrppqwoekf"
+
+[auth]
+enable_signup = true
+
+# Tokio Domino does not require email confirmation. New users are signed in and
+# sent to the lobby immediately after sign-up. Pushing this config to the linked
+# project (`supabase config push`) turns the dashboard "Confirm email" toggle OFF.
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+double_confirm_changes = false
