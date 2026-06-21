@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/dist/client/assets/$1" },
-    { "source": "/(.*)", "destination": "/dist/client/index.html" }
-  ]
-}
