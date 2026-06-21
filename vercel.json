@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "bun run build",
-  "outputDirectory": ".output/public",
-  "framework": "vite",
+  "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
+    { "source": "/assets/(.*)", "destination": "/dist/client/assets/$1" },
+    { "source": "/(.*)", "destination": "/dist/client/index.html" }
   ]
 }
